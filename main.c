@@ -1,5 +1,4 @@
-//One screen everything
-//10/18 4:57AM
+
 
 #include "stdint.h"
 #include "stdbool.h"
@@ -163,24 +162,7 @@ Canvas(g_sSliderValueCanvas2, g_psPanels + 1, 0, 0,
        CANVAS_STYLE_TEXT | CANVAS_STYLE_TEXT_OPAQUE, ClrBlack, 0, ClrSilver,
        &g_sFontCm24, "", 0, 0);
 
-/*tSliderWidget g_psSliders2[] =
-{
 
-SliderStruct(g_psPanels + 1 ,  g_psSliders2 + 1, 0,
-&g_sKentec320x240x16_SSD2119, 50, 40, 220, 40, 0, 100, 25,
-(SL_STYLE_FILL | SL_STYLE_BACKG_FILL | SL_STYLE_OUTLINE |
-SL_STYLE_TEXT | SL_STYLE_BACKG_TEXT),
-ClrGray, ClrBlack, ClrSilver, ClrWhite, ClrWhite,
-&g_sFontCm22, "VU RIGHT", 0, 0, 0),
-SliderStruct(g_psPanels + 1 ,  g_psSliders2 + 2, 0,
-&g_sKentec320x240x16_SSD2119, 50, 95, 220, 40, 0, 100, 50,
-(SL_STYLE_FILL | SL_STYLE_BACKG_FILL | SL_STYLE_OUTLINE |
-SL_STYLE_TEXT | SL_STYLE_BACKG_TEXT),
-ClrGray, ClrBlack, ClrSilver, ClrWhite, ClrWhite,
-&g_sFontCm22, "VU LEFT", 0, 0, 0)
-
-};
-*/
 
 
 //VU Meter
@@ -287,11 +269,6 @@ tCanvasWidget g_psPanels[] =
 CanvasStruct(0, 0, g_psSliders, &g_sKentec320x240x16_SSD2119, 0,
                 24, 320, 166, CANVAS_STYLE_FILL, ClrBlack, 0, 0, 0, 0, 0, 0),
 
-//CanvasStruct(0, 0, g_psSliders2, &g_sKentec320x240x16_SSD2119, 0,
-// 24, 320, 166, CANVAS_STYLE_FILL, ClrBlack, 0, 0, 0, 0, 0, 0)
-
-    //CanvasStruct(0, 0, g_psPushButtons, &g_sKentec320x240x16_SSD2119, 0, 24,
-        //         320, 166, CANVAS_STYLE_FILL, ClrBlack, 0, 0, 0, 0, 0, 0),
 CanvasStruct(0, 0, &g_sContainer1, &g_sKentec320x240x16_SSD2119, 0, 24,
 320, 166, CANVAS_STYLE_FILL, ClrBlack, 0, 0, 0, 0, 0, 0),
 };
@@ -316,7 +293,7 @@ char *g_pcPanelNames[] =
 {
 
     "     Controls    ",
-"     VU Meter    "
+    "     VU Meter    "
 
 };
 
@@ -431,39 +408,6 @@ void OnNext(tWidget *pWidget)
 //*****************************************************************************
 void OnButtonPress(tWidget *pWidget)
 {
-/*uint32_t ulIdx;
-
-   //
-   // Find the index of this push button.
-   //
-   for(ulIdx = 0; ulIdx < NUM_PUSH_BUTTONS; ulIdx++)
-   {
-       if(pWidget == (tWidget *)(g_psPushButtons + ulIdx))
-       {
-           break;
-       }
-   }
-
-   //
-   // Return if the push button could not be found.
-   //
-   if(ulIdx == NUM_PUSH_BUTTONS)
-   {
-       return;
-   }
-
-   //
-   // Toggle the state of this push button indicator.
-   //
-   g_ulButtonState ^= 1 << ulIdx;
-
-   //
-   // Set the matching indicator based on the selected state of the check box.
-   //
-   CanvasImageSet(g_psPushButtonIndicators + ulIdx,
-                  (g_ulButtonState & (1 << ulIdx)) ? g_pucLightOn :
-                  g_pucLightOff);
-   WidgetPaint((tWidget *)(g_psPushButtonIndicators + ulIdx));*/
 
 }
 
@@ -483,11 +427,8 @@ void OnSliderChange(tWidget *pWidget, int32_t lValue)
 
 if(pWidget == (tWidget *)&g_psSliders[0]) // Treble
 {
-//GPIOPinWrite(GPIO_PORTC_BASE, GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7, 239);
-//GPIOPinWrite(GPIO_PORTC_BASE, GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7, 224);
 
 GPIOPinWrite(GPIO_PORTC_BASE,GPIO_PIN_4, 0x00);
-//GPIOPinWrite(GPIO_PORTC_BASE,GPIO_PIN_4, GPIO_PIN_4);
 GPIOPinWrite(GPIO_PORTC_BASE,GPIO_PIN_5, GPIO_PIN_5);
 GPIOPinWrite(GPIO_PORTC_BASE,GPIO_PIN_6, GPIO_PIN_6);
 GPIOPinWrite(GPIO_PORTC_BASE,GPIO_PIN_7, GPIO_PIN_7);
@@ -498,17 +439,13 @@ temp_treb=(int)((float)(lValue*0.475));
 SSIDataPut(SSI3_BASE, temp_treb);
 
 TREBLE = lValue;
-//GPIOPinWrite(GPIO_PORTC_BASE,GPIO_PIN_4, GPIO_PIN_4);
 }
 
 if(pWidget == (tWidget *)&g_psSliders[1]) // Mid
 {
-//GPIOPinWrite(GPIO_PORTC_BASE, GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7, 208);
-//GPIOPinWrite(GPIO_PORTC_BASE,GPIO_PIN_5, GPIO_PIN_5);
-//GPIOPinWrite(GPIO_PORTC_BASE,GPIO_PIN_5, 0x00);
+
 
 GPIOPinWrite(GPIO_PORTC_BASE,GPIO_PIN_4, GPIO_PIN_4);
-//GPIOPinWrite(GPIO_PORTC_BASE,GPIO_PIN_4, GPIO_PIN_4);
 GPIOPinWrite(GPIO_PORTC_BASE,GPIO_PIN_5, 0x00);
 GPIOPinWrite(GPIO_PORTC_BASE,GPIO_PIN_6, GPIO_PIN_6);
 GPIOPinWrite(GPIO_PORTC_BASE,GPIO_PIN_7, GPIO_PIN_7);
@@ -517,40 +454,29 @@ GPIOPinWrite(GPIO_PORTE_BASE,GPIO_PIN_2, GPIO_PIN_2);
 temp_mid=(int)((float)(lValue*0.75));
 SSIDataPut(SSI3_BASE, temp_mid);
 MIDRANGE = lValue;
-//GPIOPinWrite(GPIO_PORTC_BASE,GPIO_PIN_5, GPIO_PIN_5);
-//GPIO_PIN_5;
 }
 
 if(pWidget == (tWidget *)&g_psSliders[2]) // Bass
 {
 
 
-//GPIOPinWrite(GPIO_PORTC_BASE,GPIO_PIN_6, GPIO_PIN_6);
-//GPIOPinWrite(GPIO_PORTC_BASE,GPIO_PIN_6,  0x00);
+
 temp=(int)((float)(lValue)*0.51);
 
 GPIOPinWrite(GPIO_PORTC_BASE,GPIO_PIN_4, GPIO_PIN_4);
-//GPIOPinWrite(GPIO_PORTC_BASE,GPIO_PIN_4, GPIO_PIN_4);
 GPIOPinWrite(GPIO_PORTC_BASE,GPIO_PIN_5, GPIO_PIN_5);
 GPIOPinWrite(GPIO_PORTC_BASE,GPIO_PIN_6, 0x00);
 GPIOPinWrite(GPIO_PORTC_BASE,GPIO_PIN_7, GPIO_PIN_7);
 GPIOPinWrite(GPIO_PORTE_BASE,GPIO_PIN_2, GPIO_PIN_2);
 
-
-// temp=(int)((float)(lValue*8)*0.5);
-//temp=lValue*8;
-
 SSIDataPut(SSI3_BASE, temp);
-//SSIDataPut(SSI3_BASE, lValue);
+
 BASS = lValue;
-//GPIOPinWrite(GPIO_PORTC_BASE,GPIO_PIN_6, GPIO_PIN_6);
-//GPIO_PIN_6=1;
+
 }
 
 if(pWidget == (tWidget *)&g_psSliders[3]) // Balance
 {
-//GPIOPinWrite(GPIO_PORTC_BASE,GPIO_PIN_7, GPIO_PIN_7);
-//GPIOPinWrite(GPIO_PORTC_BASE,GPIO_PIN_7, 0x00);
 
 GPIOPinWrite(GPIO_PORTC_BASE,GPIO_PIN_4, GPIO_PIN_4);
 
@@ -562,19 +488,15 @@ GPIOPinWrite(GPIO_PORTE_BASE,GPIO_PIN_2, GPIO_PIN_2);
 temp_bal=(int)((float)(lValue*2));
 SSIDataPut(SSI3_BASE, temp_bal);
 BALANCE = lValue;
-//GPIOPinWrite(GPIO_PORTC_BASE,GPIO_PIN_7, GPIO_PIN_7);
 
 }
 
 
 if(pWidget == (tWidget *)&g_psSliders[4]) // Volume
 {
-//GPIOPinWrite(GPIO_PORTC_BASE, GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7, 112);
-//GPIOPinWrite(GPIO_PORTE_BASE,GPIO_PIN_2, GPIO_PIN_2);
-//GPIOPinWrite(GPIO_PORTE_BASE,GPIO_PIN_2, 0x00);
+
 
 GPIOPinWrite(GPIO_PORTC_BASE,GPIO_PIN_4, GPIO_PIN_4);
-//GPIOPinWrite(GPIO_PORTC_BASE,GPIO_PIN_4, GPIO_PIN_4);
 GPIOPinWrite(GPIO_PORTC_BASE,GPIO_PIN_5, GPIO_PIN_5);
 GPIOPinWrite(GPIO_PORTC_BASE,GPIO_PIN_6, GPIO_PIN_6);
 GPIOPinWrite(GPIO_PORTC_BASE,GPIO_PIN_7, GPIO_PIN_7);
@@ -583,7 +505,6 @@ GPIOPinWrite(GPIO_PORTE_BASE,GPIO_PIN_2, 0x00);
 temp_vol=(int)((float)(lValue*0.25));
 SSIDataPut(SSI3_BASE, temp_vol);
 VOLUME = lValue;
-//GPIOPinWrite(GPIO_PORTE_BASE,GPIO_PIN_2, GPIO_PIN_2);
 
 
 }
@@ -591,7 +512,6 @@ while(SSIBusy(SSI3_BASE))
 {
 }
 SysCtlDelay(128);
-//GPIOPinWrite(GPIO_PORTC_BASE, GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7, 240);
 
 }
 
@@ -963,29 +883,11 @@ ContainerFillOn(&g_sContainer2);
 ContainerFillOn(&g_sContainer1);
 }
 
-//}
 }
 
 
 
-/*void VU_meter()
-{
-ADCProcessorTrigger(ADC1_BASE, 3);
-   while(!ADCIntStatus(ADC1_BASE, 3, false))
-   {
-    // wait
-   }
-   ADCIntClear(ADC1_BASE, 3);
-   ADCSequenceDataGet(ADC1_BASE, 3, ADC0Value);//Getting data
 
-   //Now Scale
-
-
-
-
-
-
-}*/
 
 
 
@@ -1106,10 +1008,4 @@ int main(void)
 
 
 
-/*SysCtlPeripheralEnable(SYSCTL_PERIPH_ADC1);
-SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOE);
-GPIOPinTypeADC(GPIO_PORTE_BASE, GPIO_PIN_1);
-ADCSequenceConfigure(ADC1_BASE, 3, ADC_TRIGGER_PROCESSOR, 0);
-ADCSequenceStepConfigure(ADC1_BASE, 3, 0, ADC_CTL_CH0 | ADC_CTL_IE | ADC_CTL_END);
-ADCSequenceEnable(ADC1_BASE, 3);
-ADCIntClear(ADC1_BASE, 3);*/
+
